@@ -1,0 +1,6 @@
+interface:
+  display_name: "图片交付助手"
+  short_description: "保留原图，按名称和目录复制交付，并建立可查询的图片来源清单"
+  default_prompt: "使用 $image-delivery，按我的交付模板整理本地图片并建立清单。"
+policy:
+  allow_implicit_invocation: true

@@ -27,19 +27,21 @@ class SkillInstallation(unittest.TestCase):
         # Both their targets and every fixture are inside this temporary root.
         self.temp.cleanup()
 
-    def install(self, scope="Both"):
+    def install(self, scope="Both", skills=None):
+        selection = ["-Skills", skills] if skills else []
         return subprocess.run(
             [POWERSHELL, "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
              str(PROJECT / "install_codex_skills.ps1"), "-Scope", scope,
-             "-ProjectRoot", str(self.project), "-UserSkillsRoot", str(self.skills)],
+             "-ProjectRoot", str(self.project), "-UserSkillsRoot", str(self.skills), *selection],
             cwd=self.base, capture_output=True, text=True, errors="replace", timeout=30,
         )
 
-    def test_default_both_skills_are_visible_and_share_the_project(self):
+    def test_default_three_skills_are_visible_and_share_the_project(self):
         result = self.install()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(json.loads(result.stdout)["ok"])
-        for name in ("comfy-series", "config-start"):
+        self.assertEqual(len(json.loads(result.stdout)["skills"]), 3)
+        for name in ("comfy-series", "config-start", "image-delivery"):
             target = self.project / ".agents" / "skills" / name
             linked = self.skills / name
             self.assertEqual(linked.resolve(), target.resolve())
@@ -61,7 +63,7 @@ class SkillInstallation(unittest.TestCase):
         result = self.install("Project")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertFalse(self.skills.exists())
-        for name in ("comfy-series", "config-start"):
+        for name in ("comfy-series", "config-start", "image-delivery"):
             self.assertTrue((self.project / ".agents" / "skills" / name / "SKILL.md").is_file())
 
     def test_existing_user_skill_is_preserved_before_any_install(self):
@@ -82,6 +84,24 @@ class SkillInstallation(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Missing skill source", result.stderr)
         self.assertFalse(self.skills.exists())
+        self.assertFalse((self.project / ".agents").exists())
+
+    def test_image_delivery_only_installation(self):
+        result = self.install(skills="image-delivery")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual([s["name"] for s in json.loads(result.stdout)["skills"]], ["image-delivery"])
+        self.assertTrue((self.skills / "image-delivery" / "scripts" / "run.ps1").is_file())
+        self.assertFalse((self.skills / "comfy-series").exists())
+
+    def test_existing_image_delivery_is_preserved_before_any_install(self):
+        conflict = self.skills / "image-delivery"
+        conflict.mkdir(parents=True)
+        marker = conflict / "SKILL.md"
+        marker.write_bytes(b"independent delivery install")
+        result = self.install()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(marker.read_bytes(), b"independent delivery install")
+        self.assertFalse((self.skills / "comfy-series").exists())
         self.assertFalse((self.project / ".agents").exists())
 
 

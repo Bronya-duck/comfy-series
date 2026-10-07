@@ -1,11 +1,14 @@
 param(
     [ValidateSet('Project', 'User', 'Both')][string]$Scope = 'Both',
     [string]$ProjectRoot = $PSScriptRoot,
-    [string]$UserSkillsRoot
+    [string]$UserSkillsRoot,
+    [ValidateSet('comfy-series', 'config-start', 'image-delivery')]
+    [string[]]$Skills = @('comfy-series', 'config-start', 'image-delivery')
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = [IO.Path]::GetFullPath($ProjectRoot)
-$taskNames = @('comfy-series', 'config-start')
+$taskNames = @($Skills | Select-Object -Unique)
+if (-not $taskNames) { throw 'Select at least one skill.' }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'comfy_series.json') -PathType Leaf)) {
     throw "Not a Comfy Series project: $taskRoot"
 }

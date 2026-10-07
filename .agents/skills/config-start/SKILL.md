@@ -9,7 +9,7 @@ description: 在 Windows 电脑上跨 Codex 项目启用已安装的 Comfy Serie
 
 先定位包含 `comfy_series.json` 和 `install_codex_skills.ps1` 的项目。优先检查当前项目、本技能真实目录的上级目录，以及当前用户 `.agents/skills/comfy-series` 的目录联接目标。找不到时，请用户提供 Comfy Series 克隆目录；路径按本机实际配置读取。
 
-在该项目运行 `install_codex_skills.ps1 -Scope Both`，为 comfy-series 和 config-start 建立用户级入口。安装器根据当前用户目录定位 `.agents/skills`，复用正确联接；已有同名入口指向其他内容时会保留原内容并报出冲突。处理冲突后再次运行，完成安装验证。
+在该项目运行 `install_codex_skills.ps1 -Scope Both`，为 comfy-series、config-start 和 image-delivery 建立用户级入口。image-delivery 在生图评审完成后收集文件名和目标目录，保留源图并复制交付。安装器根据当前用户目录定位 `.agents/skills`，复用正确联接；已有同名入口指向其他内容时会保留原内容并报出冲突。处理冲突后再次运行，完成安装验证；需要保留其他位置安装的 image-delivery 时，使用 `-Skills comfy-series,config-start` 只安装前两个入口。
 
 保持现有技能规则：每次调用先展示输出格式、尺寸、数量，以及带说明和例子的风格、制作内容、参考素材填写模板，再进入制作流程。
 
