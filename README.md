@@ -1,12 +1,14 @@
 # Comfy Series
 
-在当前 Codex 中提供制作要求和参考资料，由 `$comfy-series` 选择本地模型、构建 ComfyUI 工作流、逐张运行、实际看图并保存系列档案。项目已经连接本机 `127.0.0.1:8190`，没有另外一个聊天大模型服务。
+在当前 Codex 中提供制作要求和参考资料，由 `$comfy-series` 选择本地模型、构建 ComfyUI 工作流、逐张运行、实际看图并保存系列档案。默认 ComfyUI 地址为 `127.0.0.1:8190`，使用前需在自己的电脑安装并启动后端；创作判断由当前 Codex 完成。
 
 每次调用会先展示输出格式、宽高、比例、数量与风格，标明你提供的值和默认值，再进入制作流程。只发“测试”或“开始”时，会先给出带说明与例子的填写模板，等待你补充制作内容；需求已齐时，复述规格后继续执行。用自然语言说清想画什么即可，风格可填“你来选”，参考素材可填“无”，不需要知道模型名称或专业提示词。
 
 ## 直接使用
 
-本机跨项目入口为 **Config Start**，调用名 `$config-start`。它只有提示语和显示信息两份文件，源码位于 `skill_package/config-start`；运行时把已有 Comfy Series 配置成用户级目录联接，共用本机模型、资料库与风格档案。完成一次配置后，在其他项目直接使用 `$comfy-series`。这份入口针对当前 Windows 电脑的固定路径，换电脑时需要调整路径并安装运行环境。
+生图 Skill 的显示名称是 **Comfy Series**，调用名 `$comfy-series`；配置 Skill 的显示名称是 **Config Start**，调用名 `$config-start`。Config Start 只有提示语和显示信息两份文件，用于检查或补齐跨项目入口。
+
+安装器默认同时安装两个 Skill 到项目目录，并在当前用户的 `.agents/skills` 建立目录联接。在这台电脑的其他项目中，可以直接调用 `$comfy-series`，共用原项目的环境和系列档案。项目级安装只在克隆项目内可见；仅把 Config Start 放进用户目录，仍需调用它完成 Comfy Series 的启用。
 
 在这个项目的新会话里输入：
 
@@ -27,7 +29,7 @@ $comfy-series
 
 ## 浏览和复现
 
-[打开本地资料库与图库](http://127.0.0.1:8191/)：查看图片、风格基准、全部失败与成功记录、模型占用、素材以及原始网站。每张图可打开画布工作流、API 工作流和复现记录。资料库有40个原始来源、10份精选上游工作流缓存，以及本机实际运行的派生工作流。验证状态分别记录，原始模板不会因为派生流程成功而被标记通过。
+[打开本地资料库与图库](http://127.0.0.1:8191/)（先启动自己的资料库服务）：查看图片、风格基准、失败与成功记录、模型占用、素材以及原始网站。每张图可打开画布工作流、API 工作流和复现记录。仓库提供40个原始来源和10份精选上游工作流缓存；图片、素材和运行记录来自本机后续生成。验证状态分别记录，原始模板不会因为派生流程成功而被标记通过。
 
 使用说明与验收证据见 [验收报告](docs/验收报告.md)。每次运行保存在 `data/runs/J-编号`，包含请求、风格快照、模型大小/哈希、每轮种子、工作流、ComfyUI 历史和实际输出。PNG 同时保留 ComfyUI 元数据。相同环境和参数可再次执行；其他硬件或软件版本的逐像素一致性未验证。
 
@@ -37,15 +39,47 @@ $comfy-series
 
 仓库提供代码、两个 Skill、模板、资料索引和第三方许可记录。模型权重、参考原图、生成图片、Python 虚拟环境、SQLite 档案与运行缓存需要在新电脑上准备；文中的验收结果来自原开发电脑。
 
-1. 安装 Python 3.12、Git 和 ComfyUI，然后克隆项目：`git clone https://github.com/Bronya-duck/comfy-series.git`。
-2. 修改 `comfy_series.json` 中的 ComfyUI 地址、安装目录、输入和输出目录；修改 `start_comfy_series.ps1` 的 ComfyUI 便携版路径，并检查 `comfy_series.extra_models.yaml` 的项目模型目录。后端需采用与本机节点兼容的版本。
-3. 在项目目录运行 `./setup_comfy_series.ps1 -Python "你的 Python 3.12 路径"`，安装独立环境和项目级 comfy-series。运行 `./.venv/Scripts/python.exe -m comfy_series doctor` 检查环境与模型。
-4. 准备兼容的 SDXL 模型；需要风格参考时，读取 `scripts/install_reference_assets.py` 的固定下载来源和节点版本，准备相应权重与节点。模型受各自访问条件和许可证约束。
-5. 在 Codex 中打开克隆目录，调用 `$comfy-series`。Config Start 的两个路径针对原开发电脑；其他使用者先改为自己的项目 Skill 路径和用户级入口，再将 `skill_package/config-start` 放入自己的用户级 Skill 目录。
+第一版安装脚本适用于 Windows。安装 Python 3.12、Git 和 ComfyUI 后，在 PowerShell 中克隆并进入项目：
+
+```powershell
+git clone https://github.com/Bronya-duck/comfy-series.git
+cd comfy-series
+```
+
+1. 修改 `comfy_series.json` 中的 ComfyUI 地址、安装目录、输入和输出目录。若使用自带启动脚本，修改 `start_comfy_series.ps1` 的 ComfyUI 便携版路径，以及 `comfy_series.extra_models.yaml` 的 `base_path`（你的克隆目录下的 `data` 目录）。这些 ComfyUI 配置仍需按本机路径填写。
+2. 运行下面的安装命令。未指定 `-Python` 时，使用系统 Python Launcher 的 `py -3.12`；没有 Launcher 时，显式传入自己的 Python 3.12 可执行文件路径。已有 `.venv` 会复用并检查版本。
+
+```powershell
+.\setup_comfy_series.ps1
+# 或显式指定 Python 3.12：
+.\setup_comfy_series.ps1 -Python 'C:\你的Python目录\python.exe'
+```
+
+3. 成功后，项目级 `.agents/skills` 和用户级 `%USERPROFILE%\.agents\skills` 都应包含 `comfy-series` 与 `config-start`。用户级入口联接到当前克隆目录，脚本会验证 `SKILL.md` 能读取。仅想在当前项目使用时，传 `-SkillScope Project`；以后补装跨项目入口可运行 `.\install_codex_skills.ps1 -Scope Both`，无需重装 Python 或下载模型。
+4. 准备兼容的 SDXL checkpoint，放入本项目 `data/models/checkpoints` 或 ComfyUI 的 `models/checkpoints`。启动已配置的 ComfyUI，再运行 `.\.venv\Scripts\python.exe -m comfy_series doctor` 检查节点与模型。需要 IPAdapter 参考时，参考权重规格在 `data/reference_assets.json`；`scripts/install_reference_assets.py` 只下载权重，不安装节点。节点须使用 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 记录的固定版本，通过额外模型路径配置和白名单启动脚本加载。新安装且对应节点目录尚不存在时，在项目目录运行：
+
+```powershell
+git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git data/vendor/ComfyUI_IPAdapter_plus
+git -C data/vendor/ComfyUI_IPAdapter_plus checkout a0f451a5113cf9becb0847b92884cb10cbdec0ef
+.\.venv\Scripts\python.exe scripts/install_reference_assets.py
+```
+
+模型受各自访问条件和许可证约束。参考权重约3.4GB；已有节点目录时先核对版本再复用。
+
+5. 在 Codex 中调用 `$comfy-series`。安装后若列表尚未更新，重启 Codex，再在任意项目的新会话输入 `$comfy-series`。Config Start 已由安装器一并安装，不需要手动修改 Skill 中的用户名或盘符。
+
+目录联接依赖原克隆目录；请保留该目录。安装器遇到同名用户级 Skill 指向其他内容时会保留原内容并报错，需先处理该冲突。核实两个入口的位置：
+
+```powershell
+Get-Item "$env:USERPROFILE\.agents\skills\comfy-series", "$env:USERPROFILE\.agents\skills\config-start" |
+    Select-Object FullName, LinkType, Target
+```
+
+本机 Skill 的项目级、用户级发现规则与刷新方式见 [OpenAI 官方文档](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)。安装脚本已用隔离目录验证首次安装、重复安装和冲突保留；其他电脑的 ComfyUI、模型和显存兼容性仍需由 `doctor` 与实际生成验证。
 
 `S001-v1` 的文字规则和工作流快照随仓库提供，其基准原图与本机既有权重不随仓库分发。其他电脑重新建档时应提供自己的基准图和模型，实际看图后确认风格。参考流程只在报告中的8GB Windows 环境实测。
 
-服务当前已经启动。重启电脑后，在项目目录运行：
+配置完成后，在项目目录运行：
 
 ```powershell
 .\start_comfy_series.ps1
@@ -55,7 +89,7 @@ $comfy-series
 
 8190 已有服务时先查看其状态，避免重复启动。原启动脚本 `comfy_workflow/start_comfyui.ps1` 保留，可恢复不启用参考节点的配置。项目脚本保持现有 ComfyUI 0.3.64，仅白名单加载固定版本的 IPAdapter；没有修改 ComfyUI 的 Python 环境。
 
-技能安装在 `.agents/skills/comfy-series`，工具使用独立 Python 3.12 `.venv`。重新安装可运行 `setup_comfy_series.ps1`；可通过 `-Python <Python3.12绝对路径>`指定运行时。安装脚本使用锁定的依赖文件，并把 `skill_package/comfy-series` 同步到项目技能目录。技能源包与已安装入口都有真实脚本验证。
+工具使用独立 Python 3.12 `.venv`。重新安装可运行 `setup_comfy_series.ps1`；可通过 `-Python <Python3.12绝对路径>`指定运行时。安装脚本使用锁定依赖，并通过 `install_codex_skills.ps1` 同步两个 Skill、建立用户级入口。技能源包与已安装入口都有真实脚本验证。
 
 ## 工具接口
 
