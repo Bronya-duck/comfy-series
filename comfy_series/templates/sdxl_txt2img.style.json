@@ -1,0 +1,68 @@
+{
+  "display_name": "冷色收容设施摄影",
+  "locked_generation_settings": {
+    "checkpoint": "juggernautXL_XI.safetensors",
+    "checkpoint_path": "D:/comfyui/ComfyUI_windows_portable/ComfyUI/models/checkpoints/juggernautXL_XI.safetensors",
+    "clip_source": "checkpoint 内置",
+    "vae_source": "checkpoint 内置",
+    "loras": [],
+    "reference_conditioning": [],
+    "first_pass": {
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "steps": 30,
+      "cfg": 5.0,
+      "denoise": 1.0
+    },
+    "upscaling": {
+      "model": "RealESRGAN_x2plus.pth",
+      "model_path": "D:/comfyui/ComfyUI_windows_portable/ComfyUI/models/upscale_models/RealESRGAN_x2plus.pth",
+      "sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+      "model_scale": 2,
+      "resize_method": "lanczos",
+      "resize_scale": 0.75
+    },
+    "second_pass": {
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "steps": 18,
+      "cfg": 5.0,
+      "denoise": 0.2
+    },
+    "vae_tiling": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    },
+    "batch_size": 1
+  },
+  "prompt_blocks": {
+    "assembly_order": [
+      "new_subject",
+      "new_scene_and_action",
+      "new_composition",
+      "fixed_positive_style",
+      "per_image_constraints"
+    ],
+    "fixed_positive_style": "cinematic photograph, realistic materials, cold lighting, restrained atmosphere of mystery and unease, crisp details, subtle film grain",
+    "fixed_negative_style": "anime, cartoon, illustration, oversaturated, blurry, low quality, distorted perspective, watermark",
+    "content_negative_from_baseline_only": "people, person, monster, gore, blood, logo, text",
+    "content_negative_rule": "基准图的内容排除词只用于空设施场景。每次按新主体与要求重新选择，不能把 people、monster、text 等固化为系列风格。",
+    "baseline_positive_prompt": "A cinematic wide photograph of an underground containment laboratory, a single large sealed observation chamber at the end of a concrete corridor, reinforced steel doors, thick glass observation windows, exposed pipes and cables, cold overhead fluorescent lighting with a subtle red emergency light, realistic industrial materials, restrained atmosphere of mystery and unease, empty facility, symmetrical composition, eye level camera, 24mm lens, physically plausible architecture, crisp details, subtle film grain",
+    "baseline_negative_prompt": "anime, cartoon, illustration, people, person, monster, gore, blood, watermark, logo, text, oversaturated, blurry, low quality, distorted perspective"
+  },
+  "defaults": {
+    "base_resolution": [
+      1216,
+      832
+    ],
+    "output_resolution": [
+      1824,
+      1248
+    ],
+    "base_seed": 2026100701,
+    "seed_policy": "每次登记种子。新画面可用不同种子；重现基准图时使用记录中的种子。",
+    "camera": "由每张图的构图需求决定"
+  }
+}

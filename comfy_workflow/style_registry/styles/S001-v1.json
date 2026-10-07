@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "style_id": "S001",
+  "revision": 1,
+  "style_key": "S001-v1",
+  "display_name": "冷色收容设施摄影",
+  "created_date": "2026-10-07",
+  "status": "baseline_registered",
+  "visual_baseline": {
+    "image_id": "S001-v1-I0001",
+    "image_path": "D:/_SCP生图逻辑/comfy_workflow/output/SCP_Juggernaut_XI/final_00001_.png",
+    "role": "风格比较基准。此版本尚未连接自动参考图条件节点。",
+    "characteristics": {
+      "medium": "写实摄影与电影场景",
+      "palette": "低饱和冷灰、灰蓝色，少量红色实景灯光",
+      "lighting": "有明确光源的冷色照明，保留阴影与环境层次",
+      "materials": "真实材质、清晰表面细节，轻微胶片颗粒",
+      "mood": "克制、神秘、压抑",
+      "detail_level": "保持结构可读与真实尺度，避免过度锐化和纹理伪影"
+    }
+  },
+  "locked_generation_settings": {
+    "checkpoint": "juggernautXL_XI.safetensors",
+    "checkpoint_path": "D:/comfyui/ComfyUI_windows_portable/ComfyUI/models/checkpoints/juggernautXL_XI.safetensors",
+    "clip_source": "checkpoint 内置",
+    "vae_source": "checkpoint 内置",
+    "loras": [],
+    "reference_conditioning": [],
+    "first_pass": {
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "steps": 30,
+      "cfg": 5.0,
+      "denoise": 1.0
+    },
+    "upscaling": {
+      "model": "RealESRGAN_x2plus.pth",
+      "model_path": "D:/comfyui/ComfyUI_windows_portable/ComfyUI/models/upscale_models/RealESRGAN_x2plus.pth",
+      "sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+      "model_scale": 2,
+      "resize_method": "lanczos",
+      "resize_scale": 0.75
+    },
+    "second_pass": {
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "steps": 18,
+      "cfg": 5.0,
+      "denoise": 0.2
+    },
+    "vae_tiling": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    },
+    "batch_size": 1
+  },
+  "prompt_blocks": {
+    "assembly_order": ["new_subject", "new_scene_and_action", "new_composition", "fixed_positive_style", "per_image_constraints"],
+    "fixed_positive_style": "cinematic photograph, realistic materials, cold lighting, restrained atmosphere of mystery and unease, crisp details, subtle film grain",
+    "fixed_negative_style": "anime, cartoon, illustration, oversaturated, blurry, low quality, distorted perspective, watermark",
+    "content_negative_from_baseline_only": "people, person, monster, gore, blood, logo, text",
+    "content_negative_rule": "基准图的内容排除词只用于空设施场景。每次按新主体与要求重新选择，不能把 people、monster、text 等固化为系列风格。",
+    "baseline_positive_prompt": "A cinematic wide photograph of an underground containment laboratory, a single large sealed observation chamber at the end of a concrete corridor, reinforced steel doors, thick glass observation windows, exposed pipes and cables, cold overhead fluorescent lighting with a subtle red emergency light, realistic industrial materials, restrained atmosphere of mystery and unease, empty facility, symmetrical composition, eye level camera, 24mm lens, physically plausible architecture, crisp details, subtle film grain",
+    "baseline_negative_prompt": "anime, cartoon, illustration, people, person, monster, gore, blood, watermark, logo, text, oversaturated, blurry, low quality, distorted perspective"
+  },
+  "defaults": {
+    "base_resolution": [1216, 832],
+    "output_resolution": [1824, 1248],
+    "base_seed": 2026100701,
+    "seed_policy": "每次登记种子。新画面可用不同种子；重现基准图时使用记录中的种子。",
+    "camera": "由每张图的构图需求决定"
+  },
+  "allowed_per_image_changes": [
+    "主体与数量",
+    "场景与动作",
+    "构图与机位",
+    "随机种子",
+    "画幅和目标尺寸",
+    "每张图的内容约束"
+  ],
+  "requires_new_revision": [
+    "更换主模型、VAE 或风格 LoRA",
+    "加入或改变自动风格参考图条件",
+    "改变固定风格提示词或主要色彩、材质、光线规则",
+    "改变影响画面质感的采样、放大或后期设置"
+  ],
+  "archived_workflows": {
+    "canvas": "D:/_SCP生图逻辑/comfy_workflow/style_registry/styles/S001-v1.workflow.json",
+    "api": "D:/_SCP生图逻辑/comfy_workflow/style_registry/styles/S001-v1.api.json",
+    "role": "基准图生成流程快照。下一张需按 prompt_blocks 替换内容、记录新种子并生成独立副本。"
+  },
+  "quality_check": {
+    "technical": ["节点和模型可用", "没有执行错误", "输出尺寸符合要求"],
+    "visual": ["写实程度", "色彩与饱和度", "光线与阴影", "材质与颗粒", "细节密度", "整体情绪"],
+    "drift_action": "先在当前风格版本内调整新内容的措辞与构图；若需要改变锁定设置或增加风格控制模块，建立新版本并保留旧版本。",
+    "validation_scope": "基准图及完整生成链路已经验证。风格提示词拆分是新定义，尚未对一组新主题进行风格一致性实测。"
+  }
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comfy-series"
+version = "0.1.0"
+description = "Local, agent-operated ComfyUI series production and provenance tools"
+requires-python = ">=3.12"
+dependencies = ["httpx>=0.28,<0.29", "huggingface_hub>=1,<3", "PyMuPDF>=1.26,<2", "Pillow>=11,<13", "filelock>=3,<5"]
+
+[project.scripts]
+comfy-series = "comfy_series.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["comfy_series*"]
+
+[tool.setuptools.package-data]
+comfy_series = ["templates/*.json"]

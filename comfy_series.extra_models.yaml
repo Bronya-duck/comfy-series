@@ -1,0 +1,10 @@
+comfy_series:
+  base_path: D:/_SCP生图逻辑/data
+  custom_nodes: vendor
+  checkpoints: models/checkpoints
+  loras: models/loras
+  ipadapter: models/ipadapter
+  clip_vision: models/clip_vision
+  upscale_models: models/upscale_models
+  controlnet: models/controlnet
+  vae: models/vae

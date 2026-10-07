@@ -1,0 +1,6 @@
+interface:
+  display_name: "Comfy Series"
+  short_description: "用本地 ComfyUI 自主搭建生图工作流，按风格编号延续系列，并保存素材、模型来源与实际结果。"
+  default_prompt: "使用 $comfy-series，根据我的文字与参考素材，在本地 ComfyUI 制作图片并保存风格和工作流。"
+policy:
+  allow_implicit_invocation: true

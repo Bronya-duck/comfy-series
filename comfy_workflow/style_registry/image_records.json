@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "image_id": "S001-v1-I0001",
+      "series_id": "SC001",
+      "style_key": "S001-v1",
+      "created_date": "2026-10-07",
+      "status": "succeeded",
+      "registration_kind": "登记此前已生成并检查的基准图",
+      "seed_first_pass": 2026100701,
+      "seed_second_pass": 2026100701,
+      "base_resolution": [1216, 832],
+      "output_resolution": [1824, 1248],
+      "base_image": "D:/_SCP生图逻辑/comfy_workflow/output/SCP_Juggernaut_XI/base_00001_.png",
+      "final_image": "D:/_SCP生图逻辑/comfy_workflow/output/SCP_Juggernaut_XI/final_00001_.png",
+      "api_prompt_id": "134144d5-16b3-4914-8809-7d0b114a04ed",
+      "validation": "D:/_SCP生图逻辑/comfy_workflow/validation_result.json",
+      "style_comparison": "自身为基准，不代表新主题一致性已经实测"
+    }
+  ]
+}

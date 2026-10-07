@@ -1,0 +1,174 @@
+[
+  {
+    "id": "local-J-7c24f9ba7604478c",
+    "title": "本机实测：SDXL 文生图与放大",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/image_sdxl_simple.json",
+    "kind": "workflow",
+    "tags": [
+      "local",
+      "sdxl",
+      "tested"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "juggernautXL_XI.safetensors",
+      "RealESRGAN_x2plus.pth"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "ImageScale",
+      "ImageScaleBy",
+      "ImageUpscaleWithModel",
+      "KSampler",
+      "SaveImage",
+      "UpscaleModelLoader",
+      "VAEDecodeTiled",
+      "VAEEncodeTiled"
+    ],
+    "license": "本项目构建的工作流；节点与模型各自许可见来源",
+    "summary": "针对当前机器构建的最小工作流，原始上游模板未被标记运行通过。视觉评审：accepted",
+    "checked_at": "2026-10-07T15:41:16+08:00",
+    "validation_status": "runtime_passed",
+    "cached_path": "data\\library\\workflows\\local-J-7c24f9ba7604478c.json",
+    "revision": "a915bf9f46d6c941a9c5266191a1c315d9fc132eeca1a6e30bb7ce9516152772",
+    "derived_from": [
+      "official-sdxl-simple"
+    ],
+    "runtime_jobs": [
+      "J-7c24f9ba7604478c"
+    ],
+    "visual_status": "accepted"
+  },
+  {
+    "id": "local-J-db98f5ed392a468e",
+    "title": "本机实测：Pony SDXL 手绘风格系列",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/image_sdxl_simple.json",
+    "kind": "workflow",
+    "tags": [
+      "local",
+      "sdxl",
+      "tested"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "WAI-2DPonyXL_2.0.safetensors",
+      "RealESRGAN_x2plus.pth"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "ImageScale",
+      "ImageScaleBy",
+      "ImageUpscaleWithModel",
+      "KSampler",
+      "SaveImage",
+      "UpscaleModelLoader",
+      "VAEDecodeTiled"
+    ],
+    "license": "本项目构建的工作流；节点与模型各自许可见来源",
+    "summary": "针对当前机器构建的最小工作流，原始上游模板未被标记运行通过。视觉评审：accepted",
+    "checked_at": "2026-10-07T15:41:16+08:00",
+    "validation_status": "runtime_passed",
+    "cached_path": "data\\library\\workflows\\local-J-db98f5ed392a468e.json",
+    "revision": "9d2cf02ff0b454434ccb7af75fe6406e87a03678571e58cc202bd5971e6d3bc2",
+    "derived_from": [
+      "official-sdxl-simple"
+    ],
+    "runtime_jobs": [
+      "J-db98f5ed392a468e"
+    ],
+    "visual_status": "accepted"
+  },
+  {
+    "id": "local-J-ee9b2eea058d46da",
+    "title": "本机实测：SDXL IPAdapter 风格参考",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus/blob/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_advanced.json",
+    "kind": "workflow",
+    "tags": [
+      "local",
+      "sdxl",
+      "tested"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "juggernautXL_XI.safetensors",
+      "RealESRGAN_x2plus.pth",
+      "ip-adapter-plus_sdxl_vit-h.safetensors",
+      "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CLIPVisionLoader",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "IPAdapterAdvanced",
+      "IPAdapterModelLoader",
+      "ImageScale",
+      "ImageScaleBy",
+      "ImageUpscaleWithModel",
+      "KSampler",
+      "LoadImage",
+      "SaveImage",
+      "UpscaleModelLoader",
+      "VAEDecodeTiled"
+    ],
+    "license": "本项目构建的工作流；节点与模型各自许可见来源",
+    "summary": "针对当前机器构建的最小工作流，原始上游模板未被标记运行通过。视觉评审：completed_with_gaps",
+    "checked_at": "2026-10-07T15:41:16+08:00",
+    "validation_status": "runtime_passed",
+    "cached_path": "data\\library\\workflows\\local-J-ee9b2eea058d46da.json",
+    "revision": "ed53a244f809695425ae3ffee5c98bc497aff5b67e0b692f7c6431930f2d4e47",
+    "derived_from": [
+      "ipadapter-advanced"
+    ],
+    "runtime_jobs": [
+      "J-ee9b2eea058d46da"
+    ],
+    "visual_status": "completed_with_gaps"
+  },
+  {
+    "id": "local-J-2e737e9bce19427f",
+    "title": "本机实测：SDXL 基础图生图",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/image2image.json",
+    "kind": "workflow",
+    "tags": [
+      "local",
+      "sdxl",
+      "tested"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "juggernautXL_XI.safetensors",
+      "RealESRGAN_x2plus.pth"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "ImageScale",
+      "ImageScaleBy",
+      "ImageUpscaleWithModel",
+      "KSampler",
+      "LoadImage",
+      "SaveImage",
+      "UpscaleModelLoader",
+      "VAEDecodeTiled",
+      "VAEEncodeTiled"
+    ],
+    "license": "本项目构建的工作流；节点与模型各自许可见来源",
+    "summary": "针对当前机器构建的最小工作流，原始上游模板未被标记运行通过。视觉评审：accepted",
+    "checked_at": "2026-10-07T15:41:16+08:00",
+    "validation_status": "runtime_passed",
+    "cached_path": "data\\library\\workflows\\local-J-2e737e9bce19427f.json",
+    "revision": "d9244af4bcd0af6eda90e857b5b442e975e92407574d4f3cc75f9daa854144b4",
+    "derived_from": [
+      "official-img2img"
+    ],
+    "runtime_jobs": [
+      "J-2e737e9bce19427f"
+    ],
+    "visual_status": "accepted"
+  }
+]

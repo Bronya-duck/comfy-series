@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-10-07",
+  "active_series": "SC001",
+  "style_aliases": {
+    "S001": "S001-v1"
+  },
+  "styles": {
+    "S001-v1": "styles/S001-v1.json"
+  },
+  "series": {
+    "SC001": {
+      "name": "收容设施摄影示例系列",
+      "active_style_key": "S001-v1",
+      "last_successful_image_id": "S001-v1-I0001"
+    }
+  },
+  "history_file": "image_records.json",
+  "markers": {
+    "same_style_named": "【同风格:S001】",
+    "same_style_exact_revision": "【同风格:S001-v1】",
+    "same_style_previous": "【同风格:上一张】",
+    "new_style": "【新风格】",
+    "revise_style": "【调风格:S001】"
+  },
+  "resolution_rules": [
+    "给出版本号时读取该精确版本。",
+    "给出短编号时读取 style_aliases 的固定映射；不能在生成时自动更新映射。",
+    "上一张表示当前系列最近成功出图记录；待生成请求或失败记录不能覆盖它。",
+    "多个系列导致上一张无法唯一确定时，请用户给出风格编号或图片编号。",
+    "未写标记时按普通请求理解，不能自动更换已登记的风格版本。",
+    "新版本和新风格保存到新文件；旧配置与基准图持续保留。"
+  ]
+}

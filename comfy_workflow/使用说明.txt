@@ -1,0 +1,88 @@
+ComfyUI 从无到有的图片工作流
+制作与验证日期：2026-10-07
+
+已实际出图验证：RTX 5070 Laptop GPU，8GB 显存，64GB 内存。
+ComfyUI 0.3.64，PyTorch 2.8.0+cu129；CUDA 运算检查通过。
+本例生成虚构的地下收容设施场景，没有绑定某个具体 SCP 实体。
+
+一、直接使用
+1. 打开正在运行的本地页面：http://127.0.0.1:8190
+2. 完整工作流已打开，名称为 02_juggernaut_xi_complete。
+3. 修改“正向提示词”节点中的英文描述。
+4. 点击“运行”或按 Ctrl+Enter。
+5. 原图和细化图分别显示在两个“保存图像”节点中。
+
+如果使用你原来的 ComfyUI 启动脚本，也可以将下列文件拖入画布：
+  01_juggernaut_xi_base.json：基础版，只生成 1216×832 原图。
+  02_juggernaut_xi_complete.json：完整版，生成原图和 1824×1248 细化图。
+带 .api.json 的文件供程序调用；正常拖入界面时使用不带 .api 的 JSON。
+最终生成的 PNG 也包含工作流元数据，可以拖回画布恢复节点。
+
+二、流程包含的环节
+  需求与提示词
+    → 加载主模型、文本编码器 CLIP、VAE
+    → 将正向和负向提示词编码
+    → 设定画幅、批量和随机种子
+    → 第一遍采样生成潜空间图像
+    → 分块 VAE 解码，保存原图
+    → Real-ESRGAN 超分辨率放大
+    → 调整到目标分辨率
+    → 分块 VAE 编码，低强度第二遍采样补充细节
+    → 分块 VAE 解码，保存 PNG 和工作流信息
+
+正向提示词说明想画什么；负向提示词说明希望减少什么。
+潜空间是压缩的图像表示；VAE 在潜空间和可见图像之间转换。
+seed 固定时便于比较参数。需要重新构图时，修改第一遍采样的 seed。
+第二遍默认也使用固定 seed；需要一致的对比时可同步修改两个采样器。
+
+三、已选模型
+主模型：juggernautXL_XI.safetensors（原来已在本机）
+适用方向：写实场景、工业环境、电影氛围。模型内含 CLIP 与 VAE。
+官方模型说明：https://huggingface.co/RunDiffusion/Juggernaut-XI-v11
+建议起点：1216×832，30 步，CFG=5，dpmpp_2m + karras。
+
+放大模型：RealESRGAN_x2plus.pth（本次从官方仓库下载）
+用途：图像超分辨率，先放大 2 倍，再缩到 1.5 倍，以减少第二遍采样负担。
+安装路径：
+  D:\comfyui\ComfyUI_windows_portable\ComfyUI\models\upscale_models\RealESRGAN_x2plus.pth
+项目内也保留一份下载副本，文件大小 67,061,725 字节。
+官方模型列表：https://github.com/xinntao/Real-ESRGAN/blob/master/docs/model_zoo.md
+下载来源：https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth
+本次下载文件的 SHA256 记录：
+  49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb
+此值是本地文件的记录，不表示发布方提供了独立校验签名。
+
+四、默认参数
+第一遍：1216×832，batch=1，30 步，CFG=5，denoise=1.0。
+放大：Real-ESRGAN 2 倍，Lanczos 缩放 0.75 倍，得到 1824×1248。
+第二遍：18 步，CFG=5，denoise=0.20。
+两个采样器都使用 dpmpp_2m 和 karras。
+VAE 分块尺寸 512，重叠 64，控制编码与解码时的显存占用。
+第二遍属于重绘，会改变少量细节；要严格保留原图可直接使用基础版。
+
+五、输出与验证
+使用项目启动脚本时，图片保存在：
+  D:\_SCP生图逻辑\comfy_workflow\output\SCP_Juggernaut_XI
+使用原来的启动脚本时，图片保存在原 ComfyUI/output 下的同名子目录。
+base_*.png 是原图，final_*.png 是最终细化图。
+hires_00001_.png 是早期调试输出，请使用 final_*.png。
+validation_result.json 记录最终节点检查、执行状态与图片尺寸。
+execution_history.json 保存后端运行记录。
+最后一次自动验证约 30 秒，复用了已经生成的原图缓存；全新构图耗时会更长。
+最终 1824×1248 图像已经人工视觉检查，节点图也已在界面中成功载入。
+
+六、重新启动项目页面
+在 PowerShell 中运行：
+  & 'D:\_SCP生图逻辑\comfy_workflow\start_comfyui.ps1'
+然后打开 http://127.0.0.1:8190。
+这个启动脚本使用独立的项目输出目录和用户目录，所有工作流生成节点均为内置节点。
+若提示 8190 端口占用，先打开页面检查现有实例。
+
+七、后续扩展的边界
+本次验证的是单张静态图片生成与放大细化。
+固定角色外观、参考图构图、精确姿势、局部修复与视频是不同扩展需求。
+增加 LoRA、ControlNet 或参考图模块时，应选择与主模型架构匹配的模型。
+目前未验证本机另外两款 WAI 模型；切换模型时需要相应调整提示词和参数。
+
+ComfyUI 官方节点教程：
+  https://docs.comfy.org/tutorials/basic/text-to-image

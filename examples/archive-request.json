@@ -1,0 +1,11 @@
+{
+  "brief": "冷色地下档案室，钢制书架与密封档案箱，无人",
+  "prompt": "A cinematic architectural photograph of a large underground archive warehouse, steel shelving filled with closed gray archive crates, cold overhead fluorescent lighting, realistic concrete and metal, empty room",
+  "negative": "people, watermark, writing, low quality",
+  "style": "S001-v1",
+  "series_id": "SC001",
+  "output": {"width": 1536, "height": 1024, "count": 2, "format": "PNG"},
+  "constraints": {"must": ["closed archive crates"], "avoid": ["people", "text"]},
+  "materials": [],
+  "references": []
+}

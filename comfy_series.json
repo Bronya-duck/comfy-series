@@ -1,0 +1,8 @@
+{
+  "server": "http://127.0.0.1:8190",
+  "comfy_root": "D:/comfyui/ComfyUI_windows_portable/ComfyUI",
+  "comfy_input": "D:/_SCP生图逻辑/comfy_workflow/input",
+  "comfy_output": "D:/_SCP生图逻辑/comfy_workflow/output",
+  "poll_seconds": 2,
+  "timeout_seconds": 1200
+}

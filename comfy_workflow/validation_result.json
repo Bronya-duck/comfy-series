@@ -1,0 +1,67 @@
+{
+  "success": true,
+  "schema_validation": "passed",
+  "prompt_id": "134144d5-16b3-4914-8809-7d0b114a04ed",
+  "elapsed_seconds": 30.21,
+  "images": [
+    {
+      "node": "7",
+      "path": "D:\\_SCP生图逻辑\\comfy_workflow\\output\\SCP_Juggernaut_XI\\base_00001_.png",
+      "size": [
+        1216,
+        832
+      ],
+      "rgb_mean": [
+        78.23961166814271,
+        89.2451695739499,
+        89.54513537449392
+      ],
+      "extrema": [
+        [
+          0,
+          253
+        ],
+        [
+          0,
+          254
+        ],
+        [
+          0,
+          253
+        ]
+      ],
+      "workflow_metadata": true,
+      "prompt_metadata": true
+    },
+    {
+      "node": "14",
+      "path": "D:\\_SCP生图逻辑\\comfy_workflow\\output\\SCP_Juggernaut_XI\\final_00001_.png",
+      "size": [
+        1824,
+        1248
+      ],
+      "rgb_mean": [
+        78.78865658738192,
+        89.85930031910706,
+        90.34019431089743
+      ],
+      "extrema": [
+        [
+          0,
+          255
+        ],
+        [
+          0,
+          255
+        ],
+        [
+          0,
+          255
+        ]
+      ],
+      "workflow_metadata": true,
+      "prompt_metadata": true
+    }
+  ],
+  "ui_validation": "Canvas imported and Run executed successfully; both SaveImage previews visible"
+}

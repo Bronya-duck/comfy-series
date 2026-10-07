@@ -1,0 +1,1137 @@
+[
+  {
+    "id": "comfy-official-templates",
+    "title": "Comfy 官方工作流模板库",
+    "url": "https://github.com/Comfy-Org/workflow_templates",
+    "kind": "source",
+    "tags": [
+      "official",
+      "templates",
+      "workflow",
+      "primary"
+    ],
+    "architecture": "multi",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "MIT",
+    "summary": "官方模板和子图库；新模板持续加入，不能据来源身份推断与 ComfyUI 0.3.64 兼容。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "license_url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/LICENSE"
+  },
+  {
+    "id": "comfy-author-examples",
+    "title": "ComfyUI 作者示例库",
+    "url": "https://github.com/comfyanonymous/ComfyUI_examples",
+    "kind": "source",
+    "tags": [
+      "official",
+      "examples",
+      "workflow",
+      "primary"
+    ],
+    "architecture": "multi",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "作者发布的示例图片内嵌工作流元数据，可导入画布；资料库仅缓存链接，未下载示例图片。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "f9431bb000ce792094ff345446e22cac1ea6cef3",
+    "license_url": "https://github.com/comfyanonymous/ComfyUI_examples/blob/f9431bb000ce792094ff345446e22cac1ea6cef3/LICENSE"
+  },
+  {
+    "id": "example-sdxl",
+    "title": "作者示例：SDXL 与 ReVision",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/sdxl/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "sdxl",
+      "txt2img",
+      "revision",
+      "reference"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "SDXL base checkpoint；refiner / CLIP-G Vision 按所选示例另需"
+    ],
+    "required_nodes": [
+      "CheckpointLoaderSimple",
+      "KSampler"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "SDXL base 可单独运行；另展示 refiner、双提示词和 ReVision。ReVision 提取图像概念，不能视为纯风格分离的等价实现。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-img2img",
+    "title": "作者示例：Img2Img",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/img2img/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "img2img",
+      "reference",
+      "denoise"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "与图对应的 checkpoint"
+    ],
+    "required_nodes": [
+      "LoadImage",
+      "VAEEncode",
+      "KSampler",
+      "VAEDecode"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "通过 VAE 编码输入图作为采样初始潜空间，denoise 控制改动程度；会保留输入内容和布局，与仅参考风格有所不同。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-lora",
+    "title": "作者示例：LoRA",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/lora/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "lora",
+      "style"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "checkpoint",
+      "同模型家族 LoRA"
+    ],
+    "required_nodes": [
+      "LoraLoader"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "LoRA 加载器同时修改 MODEL 和 CLIP，多个 LoRA 可串联；示例中的具体模型须单独核对架构。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-controlnet",
+    "title": "作者示例：ControlNet 与 T2I-Adapter",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/controlnet/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "controlnet",
+      "t2i-adapter",
+      "composition"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "checkpoint",
+      "匹配架构和控制图语义的 ControlNet 或 T2I-Adapter"
+    ],
+    "required_nodes": [
+      "ControlNetLoader",
+      "ControlNetApplyAdvanced"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "控制图必须匹配权重所需语义，加载节点不会自动计算深度、姿态或边缘；SDXL Control-LoRA 按 ControlNet 路线使用。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-upscale-models",
+    "title": "作者示例：模型放大",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/upscale_models/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "upscale",
+      "esrgan"
+    ],
+    "architecture": "agnostic",
+    "required_models": [
+      "upscale model"
+    ],
+    "required_nodes": [
+      "UpscaleModelLoader",
+      "ImageUpscaleWithModel"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "说明 ESRGAN 等放大模型的原生加载与应用节点，以及 upscale_models 目录。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-hires-fix",
+    "title": "作者示例：两次采样 / Hires fix",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/2_pass_txt2img/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "upscale",
+      "latent",
+      "hires"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "checkpoint；部分方案另需 upscale model"
+    ],
+    "required_nodes": [
+      "KSampler",
+      "LatentUpscale"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "展示潜空间放大后再次采样、像素放大再编码，以及两阶段切换模型/提示词的做法。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "example-inpaint",
+    "title": "作者示例：局部重绘",
+    "url": "https://comfyanonymous.github.io/ComfyUI_examples/inpaint/",
+    "kind": "docs",
+    "tags": [
+      "official",
+      "inpaint",
+      "mask"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "普通或专用 inpaint checkpoint"
+    ],
+    "required_nodes": [
+      "LoadImage",
+      "VAEEncodeForInpaint",
+      "KSampler"
+    ],
+    "license": "仓库 LICENSE 明确允许使用、复制、修改和分发工作流；GitHub SPDX 为 NOASSERTION",
+    "summary": "展示掩码局部重绘；普通模型与专用重绘模型的接法和表现需要分别验证。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "official-sdxl-simple",
+    "title": "官方模板：SDXL 基础文生图",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/image_sdxl_simple.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "sdxl",
+      "txt2img",
+      "cached",
+      "core"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "sd_xl_base_1.0.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "KSampler",
+      "SaveImage",
+      "VAEDecode"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "最小 SDXL 文生图主体；原始权重为 sd_xl_base_1.0，运行前需换成已核对的本机 SDXL 文件。MarkdownNote 是画布说明。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-sdxl-simple.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "81a56c815219946840d99c8a67401dba5d9fea37",
+    "cached_sha256": "2206af43b2072dec570782c7605647e4878c5570baa7910a6c0b800eed2320e1",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/image_sdxl_simple.json"
+  },
+  {
+    "id": "official-interpolation-upscale",
+    "title": "官方模板：插值缩放与对比",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/utility_interpolation_image_upscale.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "upscale",
+      "resize",
+      "cached"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [
+      "ImageCompare",
+      "ImageScaleBy",
+      "LoadImage",
+      "SaveImage"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "不用神经网络权重的插值缩放；图中 ImageCompare 不在当前 0.3.64 节点清单，需适配后才能执行。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-interpolation-upscale.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "55eac8ad01f1e82733423721f918a6f3373cc077",
+    "cached_sha256": "3968df12e72e670486cf3b4b08a925358b817789462be550d8bc2e94efff0070",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [
+      "ImageCompare"
+    ],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/templates/utility_interpolation_image_upscale.json"
+  },
+  {
+    "id": "official-lora",
+    "title": "官方归档模板：串联 LoRA",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/lora.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "lora",
+      "style",
+      "cached",
+      "archived"
+    ],
+    "architecture": "SD1.5",
+    "required_models": [
+      "dreamshaper_8.safetensors",
+      "blindbox_v1_mix.safetensors",
+      "MoXinV1.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "KSampler",
+      "LoraLoader",
+      "SaveImage",
+      "VAEDecode"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "原 JSON 串联 blindbox 与 MoXin，基础为 DreamShaper 8；具体模型许可独立于模板 MIT，不将这些 SD1.5 LoRA 推荐给 SDXL。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-lora.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "6e88b8d27fc638945c511a1827ee80cece873284",
+    "cached_sha256": "01195e2d517f9948c6b15912c2c62a71dd00849bb88ce5e6226605ae42c66b1c",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/lora.json"
+  },
+  {
+    "id": "official-controlnet",
+    "title": "官方归档模板：ControlNet 控制图",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/controlnet_example.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "controlnet",
+      "canny",
+      "cached",
+      "archived"
+    ],
+    "architecture": "SD1.5",
+    "required_models": [
+      "DreamShaper_8_pruned.safetensors",
+      "vae-ft-mse-840000-ema-pruned.safetensors",
+      "control_v11p_sd15_scribble_fp16.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "Canny",
+      "CheckpointLoaderSimple",
+      "ControlNetApplyAdvanced",
+      "ControlNetLoader",
+      "EmptyLatentImage",
+      "KSampler",
+      "LoadImage",
+      "PreviewImage",
+      "SaveImage",
+      "VAEDecode",
+      "VAELoader"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "图中使用 Canny 预处理，但模型名为 SD1.5 scribble；控制图与模型语义应人工复核。只作节点结构参考，不作为可直接运行的 SDXL 图。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-controlnet.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "18792f068029a464cb23ef51cf66eaadf9d39af9",
+    "cached_sha256": "f01b8fdd602cc46476706f0250b9d2938aa7d7c56fe96a9abc81937a78e65c51",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/controlnet_example.json"
+  },
+  {
+    "id": "ipadapter-advanced",
+    "title": "cubiq 示例：Advanced 显式模型加载",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus/blob/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_advanced.json",
+    "kind": "workflow",
+    "tags": [
+      "ipadapter",
+      "reference",
+      "cached",
+      "sd15"
+    ],
+    "architecture": "SD1.5",
+    "required_models": [
+      "realisticVisionV51_v51VAE.safetensors",
+      "ip-adapter-plus_sd15.safetensors",
+      "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CLIPVisionLoader",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "IPAdapterAdvanced",
+      "IPAdapterModelLoader",
+      "KSampler",
+      "LoadImage",
+      "PrepImageForClipVision",
+      "SaveImage",
+      "VAEDecode"
+    ],
+    "license": "GPL-3.0（节点仓库示例）；模型许可分别核查",
+    "summary": "展示显式 adapter + 原生 CLIPVisionLoader + Advanced 接法；原图是 SD1.5 与线性权重，不能标成现成 SDXL 纯风格模板。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/ipadapter-advanced.json",
+    "revision": "a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+    "source_blob_sha": "b085824b7a8b2885fe8d53d46b142b507d0e0482",
+    "cached_sha256": "18ed379d13eaf5a6b872245d2813a38c0226561a9d1ec0e2fee23c9155db6a45",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [],
+    "missing_current_nodes": [
+      "IPAdapterAdvanced",
+      "IPAdapterModelLoader",
+      "PrepImageForClipVision"
+    ],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/cubiq/ComfyUI_IPAdapter_plus/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_advanced.json"
+  },
+  {
+    "id": "ipadapter-style-composition",
+    "title": "cubiq 示例：SDXL 风格与构图双参考",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus/blob/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_style_composition.json",
+    "kind": "workflow",
+    "tags": [
+      "ipadapter",
+      "sdxl",
+      "style",
+      "composition",
+      "reference",
+      "cached"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "AlbedoBaseXL.safetensors",
+      "ip-adapter-plus_sdxl_vit-h.safetensors",
+      "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "IPAdapterStyleComposition",
+      "IPAdapterUnifiedLoader",
+      "KSampler",
+      "LoadImage",
+      "SaveImage",
+      "VAEDecode"
+    ],
+    "license": "GPL-3.0（节点仓库示例）；模型许可分别核查",
+    "summary": "两张图分别参考风格与构图，原图为 AlbedoBaseXL；用户仅要风格时应另构图并保留必要分支。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/ipadapter-style-composition.json",
+    "revision": "a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+    "source_blob_sha": "1e1791e4066027c087b5a0d8c54c8a78df75b93b",
+    "cached_sha256": "1eb93e0b4a41369fe52a0358b1dc3ffb5df015bcad625736ebac32393e5d303e",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [],
+    "missing_current_nodes": [
+      "IPAdapterStyleComposition",
+      "IPAdapterUnifiedLoader"
+    ],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/cubiq/ComfyUI_IPAdapter_plus/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_style_composition.json"
+  },
+  {
+    "id": "ipadapter-precise-weight-type",
+    "title": "cubiq 示例：SDXL 普通/精准风格迁移比较",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus/blob/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_precise_weight_type.json",
+    "kind": "workflow",
+    "tags": [
+      "ipadapter",
+      "sdxl",
+      "style",
+      "reference",
+      "cached"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "ProteusV0.3.safetensors",
+      "ip-adapter-plus_sdxl_vit-h.safetensors",
+      "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "IPAdapterAdvanced",
+      "IPAdapterUnifiedLoader",
+      "KSampler",
+      "LoadImage",
+      "PreviewImage",
+      "VAEDecode"
+    ],
+    "license": "GPL-3.0（节点仓库示例）；模型许可分别核查",
+    "summary": "原图用 ProteusV0.3，比对 style transfer 与 style transfer precise；两条生成分支不是 8GB 最小图，PrimitiveNode 需在编译时处理。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/ipadapter-precise-weight-type.json",
+    "revision": "a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+    "source_blob_sha": "bbe21a30964e2d9af8247f3ed79e1eb13f8583d8",
+    "cached_sha256": "f2e1a49f03174a161434663291038bc72023e01d7d31cb4780ea85da2db38d28",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "Note",
+      "PrimitiveNode"
+    ],
+    "missing_current_nodes": [
+      "IPAdapterAdvanced",
+      "IPAdapterUnifiedLoader"
+    ],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/cubiq/ComfyUI_IPAdapter_plus/a0f451a5113cf9becb0847b92884cb10cbdec0ef/examples/ipadapter_precise_weight_type.json"
+  },
+  {
+    "id": "official-img2img",
+    "title": "官方归档模板：基础图生图",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/image2image.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "img2img",
+      "cached",
+      "sd15",
+      "archived"
+    ],
+    "architecture": "SD1.5",
+    "required_models": [
+      "v1-5-pruned-emaonly-fp16.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "ImageScaleToTotalPixels",
+      "KSampler",
+      "LoadImage",
+      "SaveImage",
+      "VAEDecode",
+      "VAEEncode"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "输入图缩放、VAE 编码再采样；原示例使用 SD1.5，作为流程结构参考，不能原样替换成 SDXL 后即认定可运行。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-img2img.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "5e48dd8809cdfc54caa342e85bc319e7d7a6cdd7",
+    "cached_sha256": "384a338ad158ca36f1ec57c3a30eeee130931a73e4d4b849979020217041aabf",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/image2image.json"
+  },
+  {
+    "id": "official-esrgan-upscale",
+    "title": "官方归档模板：ESRGAN 图片放大",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/esrgan_example.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "upscale",
+      "esrgan",
+      "cached",
+      "archived"
+    ],
+    "architecture": "SD1.5 + ESRGAN",
+    "required_models": [
+      "RealESRGAN_x4plus.safetensors",
+      "DreamShaper_8_pruned.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "ImageUpscaleWithModel",
+      "KSampler",
+      "PreviewImage",
+      "SaveImage",
+      "UpscaleModelLoader",
+      "VAEDecode"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "先以 DreamShaper 8 生图再用 RealESRGAN 放大；可借鉴独立放大分支，原始 checkpoint 非 SDXL。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-esrgan-upscale.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "a916289060001541c77cce3f9949c54af6592eee",
+    "cached_sha256": "ba4f0d722df5e4297a336092d665b612f8b03ba148003976d8e376adf11fb137",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/esrgan_example.json"
+  },
+  {
+    "id": "official-latent-upscale",
+    "title": "官方归档模板：潜空间二次采样放大",
+    "url": "https://github.com/Comfy-Org/workflow_templates/blob/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/hiresfix_latent_workflow.json",
+    "kind": "workflow",
+    "tags": [
+      "official",
+      "upscale",
+      "latent",
+      "hires",
+      "cached",
+      "archived"
+    ],
+    "architecture": "SD1.5",
+    "required_models": [
+      "DreamShaper_8_pruned.safetensors"
+    ],
+    "required_nodes": [
+      "CLIPTextEncode",
+      "CheckpointLoaderSimple",
+      "EmptyLatentImage",
+      "KSampler",
+      "LatentUpscale",
+      "PreviewImage",
+      "SaveImage",
+      "VAEDecode"
+    ],
+    "license": "MIT（模板）；模型许可分别核查",
+    "summary": "两次采样中间放大 latent；原始 DreamShaper 8 为 SD1.5。增加采样与显存需求，当前机器未运行。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "cached_path": "data/library/workflows/official-latent-upscale.json",
+    "revision": "b4119d0fcecf78a376e087305ec4f485c66a03f5",
+    "source_blob_sha": "de94c884dcb76ca5281795fddd47f1135e2b77d5",
+    "cached_sha256": "e9472eed54a08a6f4d9db1ad08bcfe49e766497df646a195158c8d2668afff23",
+    "format": "comfyui-ui",
+    "non_execution_nodes": [
+      "MarkdownNote"
+    ],
+    "missing_current_nodes": [],
+    "node_check": "仅对比 2026-10-07 /object_info；未载入模型或提交 /prompt",
+    "raw_url": "https://raw.githubusercontent.com/Comfy-Org/workflow_templates/b4119d0fcecf78a376e087305ec4f485c66a03f5/archived/hiresfix_latent_workflow.json"
+  },
+  {
+    "id": "cubiq-ipadapter-pack",
+    "title": "cubiq ComfyUI IPAdapter Plus",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus",
+    "kind": "source",
+    "tags": [
+      "ipadapter",
+      "sdxl",
+      "style",
+      "reference",
+      "custom-node"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "IPAdapter 权重",
+      "匹配的 CLIPVision encoder"
+    ],
+    "required_nodes": [
+      "IPAdapterModelLoader",
+      "IPAdapterAdvanced"
+    ],
+    "license": "GPL-3.0",
+    "summary": "固定源码已在本机0.3.64/torch2.8/8GB运行。最小风格参考流程技术通过；视觉内容混入仍有记录。",
+    "checked_at": "2026-10-07",
+    "validation_status": "runtime_passed",
+    "revision": "a0f451a5113cf9becb0847b92884cb10cbdec0ef",
+    "runtime_jobs": [
+      "J-ee9b2eea058d46da",
+      "J-6e435736eb114407"
+    ],
+    "validated_at": "2026-10-07T15:49:24+08:00"
+  },
+  {
+    "id": "ipadapter-node-reference",
+    "title": "IPAdapter 节点与权重模式说明",
+    "url": "https://github.com/cubiq/ComfyUI_IPAdapter_plus/blob/a0f451a5113cf9becb0847b92884cb10cbdec0ef/NODES.md",
+    "kind": "docs",
+    "tags": [
+      "ipadapter",
+      "sdxl",
+      "style",
+      "reference"
+    ],
+    "architecture": "SD1.5/SDXL",
+    "required_models": [
+      "IPAdapter 权重",
+      "匹配的 CLIPVision encoder"
+    ],
+    "required_nodes": [
+      "IPAdapterAdvanced"
+    ],
+    "license": "GPL-3.0",
+    "summary": "解释显式/统一加载器、weight_type 和起止时间；非正方形参考会中心裁切。文档的仅迁移风格描述是设计目标，并非零内容泄漏保证。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "a0f451a5113cf9becb0847b92884cb10cbdec0ef"
+  },
+  {
+    "id": "model-ipadapter-plus-sdxl",
+    "title": "H94 SDXL Plus ViT-H adapter",
+    "url": "https://huggingface.co/h94/IP-Adapter/blob/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors",
+    "kind": "model",
+    "tags": [
+      "model",
+      "ipadapter",
+      "sdxl",
+      "style",
+      "reference",
+      "official"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "SDXL checkpoint",
+      "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    ],
+    "required_nodes": [
+      "IPAdapterModelLoader",
+      "IPAdapterAdvanced"
+    ],
+    "license": "Apache-2.0（H94 模型仓库）",
+    "summary": "已从固定H94提交下载并比对上游SHA-256；与配套ViT-H编码器在本机实际生成。",
+    "checked_at": "2026-10-07",
+    "validation_status": "runtime_passed",
+    "download_url": "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors",
+    "size_display": "848 MB",
+    "sha256": "3f5062b8400c94b7159665b21ba5c62acdcd7682262743d7f2aefedef00e6581",
+    "target_directory": "models/ipadapter",
+    "target_filename": "ip-adapter-plus_sdxl_vit-h.safetensors",
+    "runtime_jobs": [
+      "J-ee9b2eea058d46da",
+      "J-6e435736eb114407"
+    ],
+    "validated_at": "2026-10-07T15:49:24+08:00"
+  },
+  {
+    "id": "model-ipadapter-vit-h-encoder",
+    "title": "H94 配套 ViT-H 图像编码器",
+    "url": "https://huggingface.co/h94/IP-Adapter/blob/main/models/image_encoder/model.safetensors",
+    "kind": "model",
+    "tags": [
+      "model",
+      "clip-vision",
+      "ipadapter",
+      "sdxl",
+      "official"
+    ],
+    "architecture": "CLIP ViT-H/14",
+    "required_models": [],
+    "required_nodes": [
+      "CLIPVisionLoader"
+    ],
+    "license": "H94 仓库 Apache-2.0；底层 LAION CLIP 模型卡为 MIT，保留双重来源说明",
+    "summary": "已下载并重命名，SHA-256匹配固定H94提交；实际图像编码与IPAdapter采样通过。",
+    "checked_at": "2026-10-07",
+    "validation_status": "runtime_passed",
+    "download_url": "https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors",
+    "size_display": "2.53 GB",
+    "sha256": "6ca9667da1ca9e0b0f75e46bb030f7e011f44f86cbfb8d5a36590fcd7507b030",
+    "target_directory": "models/clip_vision",
+    "target_filename": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors",
+    "runtime_jobs": [
+      "J-ee9b2eea058d46da",
+      "J-6e435736eb114407"
+    ],
+    "validated_at": "2026-10-07T15:49:24+08:00"
+  },
+  {
+    "id": "model-laion-vit-h",
+    "title": "LAION ViT-H 原始模型卡",
+    "url": "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K",
+    "kind": "model",
+    "tags": [
+      "model",
+      "clip-vision",
+      "license",
+      "primary"
+    ],
+    "architecture": "CLIP ViT-H/14",
+    "required_models": [],
+    "required_nodes": [
+      "CLIPVisionLoader"
+    ],
+    "license": "MIT（原始模型卡）",
+    "summary": "图像编码器来源与许可证依据；ComfyUI 使用的重打包文件应保留原始模型信息。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "model-sdxl-base",
+    "title": "Stability AI SDXL Base 1.0",
+    "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0",
+    "kind": "model",
+    "tags": [
+      "model",
+      "sdxl",
+      "txt2img",
+      "official"
+    ],
+    "architecture": "SDXL",
+    "required_models": [],
+    "required_nodes": [
+      "CheckpointLoaderSimple"
+    ],
+    "license": "CreativeML Open RAIL++-M",
+    "summary": "官方 SDXL base 可独立运行；refiner 是可选第二阶段。模型卡明确存在文本、脸部和复杂组合表达的局限，当前项目已有 SDXL 模型未因此要求下载它。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "download_url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+    "target_directory": "models/checkpoints",
+    "target_filename": "sd_xl_base_1.0.safetensors"
+  },
+  {
+    "id": "model-sdxl-control-lora",
+    "title": "Stability AI SDXL Control-LoRA",
+    "url": "https://huggingface.co/stabilityai/control-lora",
+    "kind": "model",
+    "tags": [
+      "model",
+      "sdxl",
+      "controlnet",
+      "composition",
+      "official"
+    ],
+    "architecture": "SDXL",
+    "required_models": [
+      "SDXL checkpoint",
+      "按条件选 rank128 / rank256 权重"
+    ],
+    "required_nodes": [
+      "ControlNetLoader",
+      "ControlNetApplyAdvanced"
+    ],
+    "license": "other（模型卡标注）；具体许可正文待核查",
+    "summary": "为深度、Canny、recolor、sketch 等条件提供紧凑 ControlNet 类权重；用于结构控制，不能替代纯风格参考。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "model-real-esrgan",
+    "title": "Comfy-Org Real-ESRGAN Safetensors 重打包",
+    "url": "https://huggingface.co/Comfy-Org/Real-ESRGAN_repackaged",
+    "kind": "model",
+    "tags": [
+      "model",
+      "upscale",
+      "esrgan",
+      "official"
+    ],
+    "architecture": "Real-ESRGAN",
+    "required_models": [],
+    "required_nodes": [
+      "UpscaleModelLoader",
+      "ImageUpscaleWithModel"
+    ],
+    "license": "BSD-3-Clause（模型卡）",
+    "summary": "官方重打包 RealESRGAN_x4plus，放入 upscale_models；是否满足输出质量与显存仍需本机测试。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "download_url": "https://huggingface.co/Comfy-Org/Real-ESRGAN_repackaged/resolve/main/RealESRGAN_x4plus.safetensors",
+    "target_directory": "models/upscale_models",
+    "target_filename": "RealESRGAN_x4plus.safetensors"
+  },
+  {
+    "id": "hf-search-api",
+    "title": "Hugging Face：模型检索接口",
+    "url": "https://huggingface.co/docs/huggingface_hub/guides/search",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "hugging-face",
+      "search",
+      "models"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "HfApi.list_models 支持 search、author、filter、limit 等检索条件；检索结果的许可证、文件和架构必须逐项核对。本机已通过SDK读取模型资料并固定提交。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "hf-download-api",
+    "title": "Hugging Face：固定版本下载",
+    "url": "https://huggingface.co/docs/huggingface_hub/guides/download",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "hugging-face",
+      "download",
+      "revision"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "hf_hub_download 支持文件名和完整 revision；可用 allow_patterns 限制 snapshot 下载。应固定提交并核对哈希，本机已按固定提交实际下载H94权重。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "hf-model-card-metadata",
+    "title": "Hugging Face：模型卡与许可字段",
+    "url": "https://huggingface.co/docs/hub/model-cards",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "hugging-face",
+      "license",
+      "metadata"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "模型卡元数据可给出 license、base_model 和相关标签；字段缺失不能推断许可或兼容性。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "hf-rate-limits",
+    "title": "Hugging Face：API 与文件下载限流",
+    "url": "https://huggingface.co/docs/hub/rate-limits",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "hugging-face",
+      "rate-limit"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "API、resolve 下载、网页请求有独立限流；429 与 RateLimit 响应头应触发等待/重试，免费匿名额度可能调整。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "civitai-model-api",
+    "title": "CivitAI：当前模型 API 文档入口",
+    "url": "https://developer.civitai.com/site/reference",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "civitai",
+      "search",
+      "download",
+      "access-limited"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "官方 GitHub Wiki 已于 2026-04-30 指向此新站；本次浏览新站和模型查询接口受限。只索引官方入口，不保证旧 Wiki 参数与匿名下载仍适用。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "access_status": "新站与只读 models 请求在本次工具环境无法打开",
+    "evidence_url": "https://github.com/civitai/civitai/wiki/REST-API-Reference"
+  },
+  {
+    "id": "comfy-registry-overview",
+    "title": "Comfy Registry：节点发现与版本",
+    "url": "https://docs.comfy.org/registry/overview",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "registry",
+      "custom-node",
+      "versions"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "官方 Registry 是自定义节点包目录，可发现节点、固定包版本；节点审核标记不能证明特定工作流在当前机器运行。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "comfy-registry-api",
+    "title": "Comfy Registry：API 总览与入口",
+    "url": "https://docs.comfy.org/registry/api-reference/overview",
+    "kind": "docs",
+    "tags": [
+      "api",
+      "registry",
+      "search",
+      "install"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "总览列出节点列表和安装版本接口；llms 索引另列按 ComfyUI 类名寻找包、版本查询。具体路由页面本次受限，未调用安装接口。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "evidence_url": "https://docs.comfy.org/llms.txt",
+    "access_status": "总览与索引可读；若干子路由文档无法打开"
+  },
+  {
+    "id": "comfy-agent-project",
+    "title": "shinshin86 comfy-agent CLI",
+    "url": "https://github.com/shinshin86/comfy-agent",
+    "kind": "source",
+    "tags": [
+      "agent",
+      "cli",
+      "codex",
+      "local-memory",
+      "reference"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "MIT",
+    "summary": "可连接 ComfyUI、导入图、运行与保存本地记录，并提供 Codex skill。核心复用已有/导入工作流，README 的云端验证不等于本机 8GB 验证。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "3015580bd86b5f2cb8e0f38bd8efb5379c089055"
+  },
+  {
+    "id": "comfy-agent-character-memory",
+    "title": "comfy-agent：角色/风格/参考档案接口",
+    "url": "https://github.com/shinshin86/comfy-agent/blob/3015580bd86b5f2cb8e0f38bd8efb5379c089055/docs/cli-reference.md",
+    "kind": "docs",
+    "tags": [
+      "agent",
+      "cli",
+      "style",
+      "profile",
+      "local-memory",
+      "reference"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "MIT",
+    "summary": "character 元数据有 style、prompt_template、references 和 LoRA，brief 加载适用性；reference_image 不自动填入 init_image，可借鉴风格参考与图生图角色分离。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "3015580bd86b5f2cb8e0f38bd8efb5379c089055"
+  },
+  {
+    "id": "vibecomfy-project",
+    "title": "VibeComfy：Python 工作流编写层",
+    "url": "https://github.com/peteromallet/VibeComfy",
+    "kind": "source",
+    "tags": [
+      "agent",
+      "python",
+      "workflow-authoring",
+      "provenance"
+    ],
+    "architecture": "multi",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "MIT",
+    "summary": "将来源 JSON 导入可编辑 Python bundle，保存来源、静态检查并编译 API JSON；可借鉴来源记录和工作流选择流程，不因索引此项目而安装其 ComfyUI extra。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "b1429c634e6c8ab44222c5e9901c318181f709f7"
+  },
+  {
+    "id": "vibecomfy-agent-guide",
+    "title": "VibeComfy：代理工作流规则来源",
+    "url": "https://github.com/peteromallet/VibeComfy/blob/b1429c634e6c8ab44222c5e9901c318181f709f7/docs/agent-skill/SKILL.md",
+    "kind": "docs",
+    "tags": [
+      "agent",
+      "skill",
+      "workflow-authoring",
+      "templates"
+    ],
+    "architecture": "multi",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "MIT",
+    "summary": "介绍模板检索、导入、检查、编译和运行边界；作为设计资料索引，不自动应用其安装或运行指令。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified",
+    "revision": "b1429c634e6c8ab44222c5e9901c318181f709f7"
+  },
+  {
+    "id": "comfy-workflow-json-spec",
+    "title": "ComfyUI：画布工作流 JSON 规范",
+    "url": "https://docs.comfy.org/specs/workflow_json",
+    "kind": "docs",
+    "tags": [
+      "comfyui",
+      "api",
+      "workflow",
+      "json",
+      "schema"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "画布 JSON 包含节点、连线与界面数据；不应直接当成 /prompt API 执行字典，导入/编译须处理前端节点与 widgets。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  },
+  {
+    "id": "comfy-server-routes",
+    "title": "ComfyUI：HTTP / WebSocket 路由",
+    "url": "https://docs.comfy.org/development/comfyui-server/comms_routes",
+    "kind": "docs",
+    "tags": [
+      "comfyui",
+      "api",
+      "http",
+      "websocket",
+      "execution"
+    ],
+    "architecture": "agnostic",
+    "required_models": [],
+    "required_nodes": [],
+    "license": "文档许可未核实；仅索引链接与原创摘要",
+    "summary": "描述 object_info、prompt、history、queue、upload/image、view 和 WebSocket 等接口；当前 0.3.64 以本机实际返回为准，新增路由不能直接假定存在。",
+    "checked_at": "2026-10-07",
+    "validation_status": "unverified"
+  }
+]

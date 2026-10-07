@@ -1,0 +1,166 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "WAI-2DPonyXL_2.0.safetensors"
+    },
+    "_meta": {
+      "title": "主模型 / Model"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "score_9, score_8_up, score_7_up, scenery, background only, hand painted gouache illustration of an empty underground archive library. Bookshelves and brass cabinets fill the whole frame, architecture focus, wide shot, lamps, warm amber and teal shadows, visible rough paint brush strokes, no characters, masterpiece, best quality, hand painted gouache illustration, warm amber and teal palette, visible brush strokes, elegant shapes, soft atmospheric lighting, whimsical science fiction architecture",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "主体与固定风格"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "1girl, 1boy, human, person, woman, man, face, body, character, portrait, standing, dress, long hair, people, watermark, text, photograph, photorealistic, low quality, blurry, watermark, writing, letters, people, text",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "排除内容与质量约束"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1232,
+      "height": 824,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "EmptyLatentImage"
+    }
+  },
+  "5": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "seed": 20261007000,
+      "steps": 28,
+      "cfg": 5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ],
+      "denoise": 1
+    },
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "6": {
+    "class_type": "VAEDecodeTiled",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ],
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    },
+    "_meta": {
+      "title": "VAEDecodeTiled"
+    }
+  },
+  "7": {
+    "class_type": "UpscaleModelLoader",
+    "inputs": {
+      "model_name": "RealESRGAN_x2plus.pth"
+    },
+    "_meta": {
+      "title": "UpscaleModelLoader"
+    }
+  },
+  "8": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "7",
+        0
+      ],
+      "image": [
+        "6",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "ImageUpscaleWithModel"
+    }
+  },
+  "9": {
+    "class_type": "ImageScaleBy",
+    "inputs": {
+      "image": [
+        "8",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "scale_by": 0.75
+    },
+    "_meta": {
+      "title": "ImageScaleBy"
+    }
+  },
+  "10": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "9",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1536,
+      "height": 1024,
+      "crop": "center"
+    },
+    "_meta": {
+      "title": "最终精确像素尺寸"
+    }
+  },
+  "11": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ],
+      "filename_prefix": "ComfySeries/J-db98f5ed392a468e/image_001_round_2"
+    },
+    "_meta": {
+      "title": "SaveImage"
+    }
+  }
+}

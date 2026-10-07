@@ -1,0 +1,223 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "juggernautXL_XI.safetensors"
+    },
+    "_meta": {
+      "title": "主模型 / Model"
+    }
+  },
+  "2": {
+    "class_type": "IPAdapterModelLoader",
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "_meta": {
+      "title": "IPAdapterModelLoader"
+    }
+  },
+  "3": {
+    "class_type": "CLIPVisionLoader",
+    "inputs": {
+      "clip_name": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    },
+    "_meta": {
+      "title": "CLIPVisionLoader"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "ComfySeries_8d16f70ef4bd171dccff.png"
+    },
+    "_meta": {
+      "title": "LoadImage"
+    }
+  },
+  "5": {
+    "class_type": "IPAdapterAdvanced",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "ipadapter": [
+        "2",
+        0
+      ],
+      "image": [
+        "4",
+        0
+      ],
+      "weight": 0.6,
+      "weight_type": "style transfer",
+      "combine_embeds": "concat",
+      "start_at": 0,
+      "end_at": 0.85,
+      "embeds_scaling": "V only",
+      "clip_vision": [
+        "3",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "IPAdapterAdvanced"
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "A wide photograph of a large underground archive chamber, rows of sealed steel storage cabinets, cold gray concrete walls, empty room, different layout from a corridor, cinematic industrial architecture, cinematic photograph, realistic materials, cold lighting, restrained atmosphere of mystery and unease, crisp details, subtle film grain",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "主体与固定风格"
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "people, watermark, text, low quality, anime, cartoon, illustration, oversaturated, blurry, low quality, distorted perspective, watermark, people, text",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "_meta": {
+      "title": "排除内容与质量约束"
+    }
+  },
+  "8": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1232,
+      "height": 824,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "EmptyLatentImage"
+    }
+  },
+  "9": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "seed": 20261007000,
+      "steps": 24,
+      "cfg": 5.0,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "8",
+        0
+      ],
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "10": {
+    "class_type": "VAEDecodeTiled",
+    "inputs": {
+      "samples": [
+        "9",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ],
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8
+    },
+    "_meta": {
+      "title": "VAEDecodeTiled"
+    }
+  },
+  "11": {
+    "class_type": "UpscaleModelLoader",
+    "inputs": {
+      "model_name": "RealESRGAN_x2plus.pth"
+    },
+    "_meta": {
+      "title": "UpscaleModelLoader"
+    }
+  },
+  "12": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "11",
+        0
+      ],
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "ImageUpscaleWithModel"
+    }
+  },
+  "13": {
+    "class_type": "ImageScaleBy",
+    "inputs": {
+      "image": [
+        "12",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "scale_by": 0.75
+    },
+    "_meta": {
+      "title": "ImageScaleBy"
+    }
+  },
+  "14": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "13",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1536,
+      "height": 1024,
+      "crop": "center"
+    },
+    "_meta": {
+      "title": "最终精确像素尺寸"
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "14",
+        0
+      ],
+      "filename_prefix": "ComfySeries/J-ee9b2eea058d46da/image_001_round_3"
+    },
+    "_meta": {
+      "title": "SaveImage"
+    }
+  }
+}

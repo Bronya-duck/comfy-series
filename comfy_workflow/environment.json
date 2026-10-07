@@ -1,0 +1,23 @@
+{
+  "comfyui": "0.3.64",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "vram_mib": 8151,
+  "torch": "2.8.0+cu129",
+  "cuda": "12.9",
+  "cuda_tensor_test": "passed",
+  "model": "juggernautXL_XI.safetensors",
+  "checkpoint_dir": "D:/comfyui/ComfyUI_windows_portable/ComfyUI/models/checkpoints",
+  "base_resolution": [
+    1216,
+    832
+  ],
+  "hires_resolution": [
+    1824,
+    1248
+  ],
+  "seed": 2026100701,
+  "upscaler": "RealESRGAN_x2plus.pth",
+  "upscaler_bytes": 67061725,
+  "upscaler_source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth",
+  "upscaler_sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb"
+}
